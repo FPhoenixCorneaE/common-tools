@@ -8,9 +8,15 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.Rect
 import android.graphics.drawable.BitmapDrawable
 import android.os.Build
-import android.view.*
+import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.TouchDelegate
+import android.view.View
+import android.view.ViewAnimationUtils
+import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.animation.AccelerateDecelerateInterpolator
@@ -23,6 +29,7 @@ import androidx.core.graphics.applyCanvas
 import androidx.core.view.ViewCompat
 import com.fphoenixcorneae.common.ext.dp
 import kotlin.math.hypot
+import kotlin.math.roundToInt
 
 fun View.visible() = run { visibility = View.VISIBLE }
 
@@ -76,6 +83,7 @@ fun View.setMargins(
             rightPx = right.dp
             bottomPx = bottom.dp
         }
+
         else -> {
             leftPx = left.toInt()
             rightPx = right.toInt()
@@ -124,6 +132,7 @@ fun View.setPadding(
             rightPx = right.dp
             bottomPx = bottom.dp
         }
+
         else -> {
             leftPx = left.toInt()
             rightPx = right.toInt()
@@ -324,6 +333,22 @@ fun View.touchInside(motionEvent: MotionEvent): Boolean =
         val motionY = motionEvent.rawY
         motionX >= left && motionX <= right && motionY >= top && motionY <= bottom
     }
+
+/**
+ * 扩展触摸区域
+ */
+fun View.expendTouchArea(expendDp: Float) {
+    post {
+        val rect = Rect()
+        getHitRect(rect)
+        val expendPx = (expendDp * resources.displayMetrics.density).roundToInt()
+        rect.left -= expendPx
+        rect.top -= expendPx
+        rect.right += expendPx
+        rect.bottom += expendPx
+        (parent as? View)?.touchDelegate = TouchDelegate(rect, this)
+    }
+}
 
 /**
  * 把自身从父View中移除
