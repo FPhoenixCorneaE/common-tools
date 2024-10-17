@@ -9,7 +9,7 @@ import androidx.annotation.Keep
  */
 @Keep
 @Target(AnnotationTarget.CLASS, AnnotationTarget.FILE, AnnotationTarget.VALUE_PARAMETER, AnnotationTarget.FUNCTION)
-@kotlin.annotation.Retention(AnnotationRetention.BINARY)
+@Retention(AnnotationRetention.BINARY)
 annotation class GradientType {
     companion object {
         /** Gradient is linear (default.) */

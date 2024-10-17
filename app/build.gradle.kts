@@ -107,7 +107,7 @@ dependencies {
     implementation(Deps.Eventbus.eventbus)
     implementation(Deps.Gson.gson)
     implementation(Deps.Log.logger)
-    implementation(projects.common)
+    implementation(projects.tools)
     testImplementation(Deps.Test.junit)
     androidTestImplementation(Deps.Test.junitExt)
     androidTestImplementation(Deps.Test.espresso)

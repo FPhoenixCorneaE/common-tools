@@ -1,6 +1,12 @@
 package com.fphoenixcorneae.plugin
 
-object Deps {
+import org.gradle.api.Plugin
+import org.gradle.api.Project
+
+class Deps : Plugin<Project> {
+
+    override fun apply(target: Project) {}
+
     /** Android */
     object Android {
         const val compileSdkVersion = 33

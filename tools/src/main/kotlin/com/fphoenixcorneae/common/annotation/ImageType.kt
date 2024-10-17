@@ -8,7 +8,7 @@ import androidx.annotation.Keep
  */
 @Keep
 @Target(AnnotationTarget.CLASS, AnnotationTarget.FILE, AnnotationTarget.VALUE_PARAMETER, AnnotationTarget.FUNCTION)
-@kotlin.annotation.Retention(AnnotationRetention.BINARY)
+@Retention(AnnotationRetention.BINARY)
 annotation class ImageType {
     companion object {
         const val JPG = "jpg"

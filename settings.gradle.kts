@@ -15,7 +15,7 @@ dependencyResolutionManagement {
         maven("https://jitpack.io")
     }
 }
-includeBuild("versionPlugin")
-include(":common")
+includeBuild("composing-builds")
+include(":tools")
 include(":app")
-rootProject.name = "basic-common"
+rootProject.name = "common-tools"

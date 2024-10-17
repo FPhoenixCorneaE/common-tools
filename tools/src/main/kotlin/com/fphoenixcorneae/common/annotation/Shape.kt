@@ -9,7 +9,7 @@ import androidx.annotation.Keep
  */
 @Keep
 @Target(AnnotationTarget.CLASS, AnnotationTarget.FILE, AnnotationTarget.VALUE_PARAMETER, AnnotationTarget.FUNCTION)
-@kotlin.annotation.Retention(AnnotationRetention.BINARY)
+@Retention(AnnotationRetention.BINARY)
 annotation class Shape {
     companion object {
         /** Shape is a rectangle, possibly with rounded corners */

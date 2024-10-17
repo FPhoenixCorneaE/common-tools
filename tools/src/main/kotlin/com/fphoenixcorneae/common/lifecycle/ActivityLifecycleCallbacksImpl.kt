@@ -7,7 +7,12 @@ import android.app.Application
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
-import com.fphoenixcorneae.common.ext.*
+import com.fphoenixcorneae.common.ext.activityList
+import com.fphoenixcorneae.common.ext.fixSoftInputLeaks
+import com.fphoenixcorneae.common.ext.logd
+import com.fphoenixcorneae.common.ext.logi
+import com.fphoenixcorneae.common.ext.runOnUiThreadDelayed
+import com.fphoenixcorneae.common.ext.setTopActivity
 import com.fphoenixcorneae.common.util.LanguageUtil
 import java.util.concurrent.CopyOnWriteArrayList
 
@@ -18,7 +23,8 @@ import java.util.concurrent.CopyOnWriteArrayList
  */
 class ActivityLifecycleCallbacksImpl : Application.ActivityLifecycleCallbacks {
     private val mStatusListeners: MutableList<OnAppStatusChangedListener?> = mutableListOf()
-    private val mDestroyedListenerMap: MutableMap<Activity, MutableList<OnActivityDestroyedListener?>> = hashMapOf()
+    private val mDestroyedListenerMap: MutableMap<Activity, MutableList<OnActivityDestroyedListener?>> =
+        hashMapOf()
     private var mForegroundCount = 0
     private var mConfigCount = 0
     private var mIsBackground = false
