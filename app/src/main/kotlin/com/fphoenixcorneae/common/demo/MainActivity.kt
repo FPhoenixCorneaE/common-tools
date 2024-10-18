@@ -16,6 +16,7 @@ import com.fphoenixcorneae.common.demo.cache.CacheActivity
 import com.fphoenixcorneae.common.demo.databinding.ActivityMainBinding
 import com.fphoenixcorneae.common.demo.location.LocationActivity
 import com.fphoenixcorneae.common.demo.shortcut.ShortcutActivity
+import com.fphoenixcorneae.common.demo.spannable.SpannableStringActivity
 import com.fphoenixcorneae.common.drawable.*
 import com.fphoenixcorneae.common.dsl.layout.TextView
 import com.fphoenixcorneae.common.ext.*
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mViewBinding = ActivityMainBinding.inflate(layoutInflater)
+        mViewBinding.lifecycleOwner = this
         setContentView(mViewBinding.root)
         initObserver()
 
@@ -95,11 +97,11 @@ class MainActivity : AppCompatActivity() {
 
         // 申请权限
         mViewBinding.btnRequestPermissions.setOnClickListener {
-//            requestPermissions()
+            //            requestPermissions()
             callPhone("10010")
         }
         mViewBinding.btnRequestPermissions.background = codeConstructsGradientDrawable()
-//        mViewBinding.btnRequestPermissions.background = codeConstructsStateListDrawable()
+        //        mViewBinding.btnRequestPermissions.background = codeConstructsStateListDrawable()
 
         // 设置亮度
         mViewBinding.sbBrightness.setOnSeekBarChangeListener(
@@ -117,9 +119,10 @@ class MainActivity : AppCompatActivity() {
                 createBitmap().toBytes().toInputStream()
             ).also {
                 if (it) {
-                    File(filesDir.absolutePath + "/$filename").zip(filesDir.absolutePath + "/压缩.zip").also {
-                        it.unZip(filesDir.absolutePath + "/解压")
-                    }
+                    File(filesDir.absolutePath + "/$filename").zip(filesDir.absolutePath + "/压缩.zip")
+                        .also {
+                            it.unZip(filesDir.absolutePath + "/解压")
+                        }
                 }
             }
         }
@@ -153,7 +156,7 @@ class MainActivity : AppCompatActivity() {
     private fun codeConstructsGradientDrawable(): Drawable {
         return gradientDrawable(this) {
             shape(Shape.RECTANGLE)
-//            solidColor(Color.GRAY)
+            //            solidColor(Color.GRAY)
             solidColor {
                 item {
                     color(Color.RED)
@@ -165,7 +168,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             corner {
-//                radius(20f)
+                //                radius(20f)
                 radii(
                     topLeftRadius = 5f,
                     topRightRadius = 10f,
@@ -249,6 +252,10 @@ class MainActivity : AppCompatActivity() {
 
     fun location(view: View) {
         startKtxActivity<LocationActivity>()
+    }
+
+    fun spannable(view: View) {
+        startKtxActivity<SpannableStringActivity>()
     }
 }
 

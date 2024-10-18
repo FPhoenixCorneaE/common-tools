@@ -25,5 +25,6 @@
             android:name=".shortcut.ShortcutActivity"
             android:exported="true" />
         <activity android:name=".location.LocationActivity" />
+        <activity android:name=".spannable.SpannableStringActivity" />
     </application>
 </manifest>
