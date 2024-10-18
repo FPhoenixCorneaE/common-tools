@@ -2,18 +2,13 @@ package com.fphoenixcorneae.common.demo
 
 import android.app.Application
 import android.content.Context
-import androidx.lifecycle.ViewModelStore
-import androidx.lifecycle.ViewModelStoreOwner
 import com.fphoenixcorneae.common.ext.isDebuggable
 import com.fphoenixcorneae.common.log.AndroidLog
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
 
-class App : Application(), ViewModelStoreOwner {
-
-    override val viewModelStore: ViewModelStore
-        get() = ViewModelStore()
+class App : Application() {
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)

@@ -35,7 +35,7 @@ import java.io.File
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mViewBinding: ActivityMainBinding
-    private val appViewModel by androidViewModel<AppViewModel>()
+    private val appViewModel by applicationViewModel<AppViewModel>()
 
     @SuppressLint("UseCompatLoadingForDrawables", "MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {

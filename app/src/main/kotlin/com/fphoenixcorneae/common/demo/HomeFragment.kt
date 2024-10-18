@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.fphoenixcorneae.common.dsl.layout.LinearLayout
-import com.fphoenixcorneae.common.ext.androidViewModel
+import com.fphoenixcorneae.common.ext.applicationViewModel
 import com.fphoenixcorneae.common.ext.logd
 
 class HomeFragment : Fragment() {
 
-    private val appViewModel by androidViewModel<AppViewModel>()
+    private val appViewModel by applicationViewModel<AppViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
