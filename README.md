@@ -26,37 +26,6 @@ dependencies {
 }
 ```
 
-**Step 3.**Add the dependencies you need
-
-```kotlin
-dependencies {
-    // lifecycle
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
-    // coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version")
-    // navigation
-    implementation("androidx.navigation:navigation-common-ktx:$navigation_version")
-    implementation("androidx.navigation:navigation-fragment-ktx:$navigation_version")
-    implementation("androidx.navigation:navigation-runtime-ktx:$navigation_version")
-    implementation("androidx.navigation:navigation-ui-ktx:$navigation_version")
-    // Gson
-    implementation("com.google.code.gson:gson:2.8.9")
-    // eventbus
-    implementation("org.greenrobot:eventbus:3.3.1")
-    // coil
-    implementation("io.coil-kt:coil:$coil_version")
-    implementation("io.coil-kt:coil-gif:$coil_version")
-    implementation("io.coil-kt:coil-svg:$coil_version")
-    implementation("io.coil-kt:coil-video:$coil_version")
-    // coil-transformations
-    implementation("com.github.Commit451.coil-transformations:transformations:$coil_transformations_version")
-    implementation("com.github.Commit451.coil-transformations:transformations-gpu:$coil_transformations_version")
-    implementation("com.github.Commit451.coil-transformations:transformations-face-detection:$coil_transformations_version")
-}
-```
-
 ## How to use：
 
 ### 1.[Kotlin扩展属性、函数](https://github.com/FPhoenixCorneaE/Common/blob/main/READMEKT.md)
