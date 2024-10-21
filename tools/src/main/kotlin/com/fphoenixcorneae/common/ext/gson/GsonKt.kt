@@ -4,12 +4,40 @@ import com.fphoenixcorneae.common.ext.loge
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonSyntaxException
+import com.google.gson.ToNumberPolicy
 import com.google.gson.reflect.TypeToken
 import java.io.Reader
+import java.lang.ref.SoftReference
 import java.lang.reflect.Type
 
-val GSON: Gson = createGsonBuilder(true).create()
-val GSON_NO_NULLS: Gson = createGsonBuilder(false).create()
+var gsonReference = SoftReference(Gson())
+var gsonBuilderReference = SoftReference(GsonBuilder())
+
+val defaultGsonBuilder: GsonBuilder
+    get() = gsonBuilderReference.get() ?: GsonBuilder().also {
+        gsonBuilderReference = SoftReference(it)
+    }
+
+val disableHtmlEscapingGsonBuilder = defaultGsonBuilder.disableHtmlEscaping()
+
+val defaultGson: Gson
+    get() = gsonReference.get() ?: Gson().also {
+        gsonReference = SoftReference(it)
+    }
+
+val serializeNullsGson = defaultGsonBuilder.serializeNulls().create()
+
+val disableHtmlEscapingGson = defaultGsonBuilder.disableHtmlEscaping().create()
+
+val prettyPrintingGson = disableHtmlEscapingGsonBuilder.setPrettyPrinting().create()
+
+val defaultDateFormatGson = defaultGsonBuilder.setDateFormat("yyyy-MM-dd HH:mm:ss").create()
+
+val defaultNumberStrategyGson =
+    defaultGsonBuilder.setObjectToNumberStrategy(ToNumberPolicy.LONG_OR_DOUBLE).create()
+
+val defaultTypeAdapterGson: Gson = createGsonBuilder(true).create()
+val defaultTypeAdapterGsonIgnoreNull: Gson = createGsonBuilder(false).create()
 
 /**
  * Serializes an object into json.
@@ -22,8 +50,8 @@ fun Any?.toJson(
     includeNulls: Boolean = true
 ): String {
     return when {
-        includeNulls -> GSON.toJson(this)
-        else -> GSON_NO_NULLS.toJson(this)
+        includeNulls -> defaultTypeAdapterGson.toJson(this)
+        else -> defaultTypeAdapterGsonIgnoreNull.toJson(this)
     }
 }
 
@@ -40,8 +68,8 @@ fun Any?.toJson(
     includeNulls: Boolean = true
 ): String {
     return when {
-        includeNulls -> GSON.toJson(this, typeOfSrc)
-        else -> GSON_NO_NULLS.toJson(this, typeOfSrc)
+        includeNulls -> defaultTypeAdapterGson.toJson(this, typeOfSrc)
+        else -> defaultTypeAdapterGsonIgnoreNull.toJson(this, typeOfSrc)
     }
 }
 
@@ -53,7 +81,7 @@ fun Any?.toJson(
  */
 fun <T> String?.toObject(type: Class<T>): T? {
     return try {
-        GSON.fromJson(this, type)
+        defaultTypeAdapterGson.fromJson(this, type)
     } catch (e: JsonSyntaxException) {
         e.toString().loge()
         null
@@ -68,7 +96,7 @@ fun <T> String?.toObject(type: Class<T>): T? {
  */
 fun <T> String?.toObject(type: Type): T? {
     return try {
-        GSON.fromJson(this, type)
+        defaultTypeAdapterGson.fromJson(this, type)
     } catch (e: JsonSyntaxException) {
         e.toString().loge()
         null
@@ -83,7 +111,7 @@ fun <T> String?.toObject(type: Type): T? {
  */
 fun <T> Reader.toObject(type: Class<T>): T? {
     return try {
-        GSON.fromJson(this, type)
+        defaultTypeAdapterGson.fromJson(this, type)
     } catch (e: JsonSyntaxException) {
         e.toString().loge()
         null
@@ -98,7 +126,7 @@ fun <T> Reader.toObject(type: Class<T>): T? {
  */
 fun <T> Reader.toObject(type: Type): T? {
     return try {
-        GSON.fromJson(this, type)
+        defaultTypeAdapterGson.fromJson(this, type)
     } catch (e: JsonSyntaxException) {
         e.toString().loge()
         null
