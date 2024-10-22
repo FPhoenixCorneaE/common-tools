@@ -81,6 +81,7 @@ android {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+    implementation(Deps.FPhoenixCorneaE.coroutinesPermissions)
     implementation(Deps.AndroidX.appcompat)
     implementation(Deps.AndroidX.constraintLayout)
     implementation(Deps.AndroidX.material)
@@ -107,6 +108,7 @@ dependencies {
     implementation(Deps.eventbus)
     implementation(Deps.gson)
     implementation(Deps.logger)
+    implementation(Deps.mmkv)
     implementation(projects.tools)
     testImplementation(Deps.Test.junit)
     androidTestImplementation(Deps.Test.junitExt)

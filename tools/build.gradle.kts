@@ -79,7 +79,7 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     // FPhoenixCorneaE
-    api(Deps.FPhoenixCorneaE.coroutinesPermissions)
+    implementation(Deps.FPhoenixCorneaE.coroutinesPermissions)
     // androidX
     implementation(Deps.AndroidX.appcompat)
     implementation(Deps.AndroidX.constraintLayout)

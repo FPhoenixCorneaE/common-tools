@@ -15,6 +15,7 @@ import com.fphoenixcorneae.common.annotation.Shape
 import com.fphoenixcorneae.common.demo.cache.CacheActivity
 import com.fphoenixcorneae.common.demo.databinding.ActivityMainBinding
 import com.fphoenixcorneae.common.demo.location.LocationActivity
+import com.fphoenixcorneae.common.demo.mmkv.MmkvDelegateActivity
 import com.fphoenixcorneae.common.demo.shortcut.ShortcutActivity
 import com.fphoenixcorneae.common.demo.spannable.SpannableStringActivity
 import com.fphoenixcorneae.common.drawable.*
@@ -256,6 +257,10 @@ class MainActivity : AppCompatActivity() {
 
     fun spannable(view: View) {
         startKtxActivity<SpannableStringActivity>()
+    }
+
+    fun mmkv(view: View) {
+        startKtxActivity<MmkvDelegateActivity>()
     }
 }
 
