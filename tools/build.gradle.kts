@@ -111,9 +111,11 @@ dependencies {
     implementation(Deps.Coroutines.core)
     implementation(Deps.Coroutines.android)
     // eventbus
-    implementation(Deps.Eventbus.eventbus)
+    implementation(Deps.eventbus)
     // gson
-    implementation(Deps.Gson.gson)
+    implementation(Deps.gson)
+    // mmkv
+    implementation(Deps.mmkv)
 
     // test
     testImplementation(Deps.Test.junit)

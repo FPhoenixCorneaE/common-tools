@@ -26,5 +26,20 @@
             android:exported="true" />
         <activity android:name=".location.LocationActivity" />
         <activity android:name=".spannable.SpannableStringActivity" />
+        <!-- Startup -->
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false">
+
+            <meta-data
+                android:name="com.fphoenixcorneae.common.startup.ActivityLifecycleInitializer"
+                android:value="androidx.startup"
+                tools:node="remove" />
+            <meta-data
+                android:name="com.fphoenixcorneae.common.startup.GlobalExceptionHandlerInitializer"
+                android:value="androidx.startup"
+                tools:node="remove" />
+        </provider>
     </application>
 </manifest>

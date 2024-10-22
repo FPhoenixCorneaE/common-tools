@@ -95,7 +95,19 @@
             tools:node="merge">
 
             <meta-data
-                android:name="com.fphoenixcorneae.common.CommonInitializer"
+                android:name="com.fphoenixcorneae.common.startup.ApplicationInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="com.fphoenixcorneae.common.startup.ActivityLifecycleInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="com.fphoenixcorneae.common.startup.ToastInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="com.fphoenixcorneae.common.startup.GlobalExceptionHandlerInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="com.fphoenixcorneae.common.startup.MMKVInitializer"
                 android:value="androidx.startup" />
         </provider>
     </application>

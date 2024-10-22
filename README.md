@@ -30,12 +30,33 @@ dependencies {
 
 ### 1.[Kotlin扩展属性、函数](https://github.com/FPhoenixCorneaE/Common/blob/main/READMEKT.md)
 
-### 2.若是有自定义 Startup Initializer，需要依赖`CommonInitializer`
+### 2.若是有自定义 Startup Initializer，需要依赖`ApplicationInitializer`
 
 ```kotlin
 override fun dependencies(): MutableList<Class<out Initializer<*>>> {
-    return mutableListOf(CommonInitializer::class.java)
+    return mutableListOf(ApplicationInitializer::class.java)
 }
+```
+
+* 若是想自己处理全局异常，可以移除，然后依赖自己的
+```xml
+
+<provider android:authorities="${applicationId}.androidx-startup" android:exported="false"
+    android:name="androidx.startup.InitializationProvider">
+    
+    <meta-data android:name="com.fphoenixcorneae.common.startup.GlobalExceptionHandlerInitializer"
+        android:value="androidx.startup" tools:node="remove" />
+</provider>
+```
+* 若是想自己注册Activity生命周期回调，可以移除，然后依赖自己的
+```xml
+
+<provider android:authorities="${applicationId}.androidx-startup" android:exported="false"
+    android:name="androidx.startup.InitializationProvider">
+
+    <meta-data android:name="com.fphoenixcorneae.common.startup.ActivityLifecycleInitializer"
+        android:value="androidx.startup" tools:node="remove" />
+</provider>
 ```
 
 ### 3.[动态权限申请](https://github.com/FPhoenixCorneaE/CoroutinesPermissions)

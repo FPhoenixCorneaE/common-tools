@@ -10,7 +10,7 @@ class Deps : Plugin<Project> {
     /** Android */
     object Android {
         const val compileSdkVersion = 33
-        const val minSdkVersion = 21
+        const val minSdkVersion = 23
         const val targetSdkVersion = 33
         const val versionCode = 210
         const val versionName = "2.1.0"
@@ -87,21 +87,6 @@ class Deps : Plugin<Project> {
             "com.github.Commit451.coil-transformations:transformations-face-detection:$version"
     }
 
-    /** Log */
-    object Log {
-        const val logger = "com.orhanobut:logger:2.2.0"
-    }
-
-    /** Gson */
-    object Gson {
-        const val gson = "com.google.code.gson:gson:2.10.1"
-    }
-
-    /** Eventbus */
-    object Eventbus {
-        const val eventbus = "org.greenrobot:eventbus:3.3.1"
-    }
-
     /** Test */
     object Test {
         const val junit = "junit:junit:4.13.2"
@@ -110,5 +95,19 @@ class Deps : Plugin<Project> {
         const val rules = "androidx.test:rules:1.5.0"
         const val junitExt = "androidx.test.ext:junit:1.1.5"
         const val espresso = "androidx.test.espresso:espresso-core:3.5.1"
+    }
+
+    companion object {
+        // logger
+        const val logger = "com.orhanobut:logger:2.2.0"
+
+        // Gson
+        const val gson = "com.google.code.gson:gson:2.10.1"
+
+        // Eventbus
+        const val eventbus = "org.greenrobot:eventbus:3.3.1"
+
+        // MMKV--基于 mmap 的高性能通用 key-value 组件
+        const val mmkv = "com.tencent:mmkv:2.0.0"
     }
 }
