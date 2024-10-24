@@ -12,11 +12,11 @@ class MMKVInitializer : Initializer<Unit>, CoroutineScope by IoScope() {
     override fun create(context: Context) {
         launch {
             MMKV.initialize(context)
-            "MMKVInitializer 初始化, threadId: ${Thread.currentThread()}".logd("startup")
+            "MMKVInitializer 初始化, thread: ${Thread.currentThread()}".logd("startup")
         }
     }
 
     override fun dependencies(): MutableList<Class<out Initializer<*>>> {
-        return mutableListOf()
+        return mutableListOf(ApplicationInitializer::class.java)
     }
 }

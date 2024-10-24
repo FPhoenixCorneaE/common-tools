@@ -14,7 +14,7 @@ class ToastInitializer : Initializer<Unit>, CoroutineScope by MainScope() {
         launch {
             // 初始化 ToastUtil
             ToastUtil.init(applicationContext)
-            "ToastInitializer 初始化, threadId: ${Thread.currentThread()}".logd("startup")
+            "ToastInitializer 初始化, thread: ${Thread.currentThread()}".logd("startup")
         }
     }
 

@@ -1,8 +1,5 @@
 package com.fphoenixcorneae.common.mmkv
 
-import com.fphoenixcorneae.common.ext.gson.toJson
-import com.fphoenixcorneae.common.ext.gson.toObject
-import com.google.gson.reflect.TypeToken
 import com.tencent.mmkv.MMKV
 import java.text.DateFormat
 import java.util.Date
@@ -131,21 +128,6 @@ class MmkvDateDelegate(key: String, val format: DateFormat, mmkv: MMKV) :
     override fun setValue(thisRef: Any?, property: KProperty<*>, value: Date?) {
         value?.let {
             mmkv.encode(key, runCatching { format.format(it) }.getOrNull())
-        } ?: mmkv.remove(key)
-    }
-}
-
-class MmkvJsonDelegate<T>(key: String, mmkv: MMKV) :
-    MmkvDelegate<T?>(key, mmkv) {
-    override fun getValue(thisRef: Any?, property: KProperty<*>): T? {
-        return mmkv.decodeString(key)?.let {
-            it.toObject(object : TypeToken<T>() {}.type)
-        }
-    }
-
-    override fun setValue(thisRef: Any?, property: KProperty<*>, value: T?) {
-        value?.let {
-            mmkv.encode(key, it.toJson(object : TypeToken<T>() {}.type))
         } ?: mmkv.remove(key)
     }
 }

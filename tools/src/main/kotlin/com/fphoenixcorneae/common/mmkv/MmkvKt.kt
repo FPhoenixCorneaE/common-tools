@@ -1,8 +1,12 @@
 package com.fphoenixcorneae.common.mmkv
 
+import com.fphoenixcorneae.common.ext.gson.toJson
+import com.fphoenixcorneae.common.ext.gson.toObject
 import com.fphoenixcorneae.common.ext.yyyyMMddFormat
+import com.google.gson.reflect.TypeToken
 import com.tencent.mmkv.MMKV
 import java.text.DateFormat
+import kotlin.reflect.KProperty
 
 val defaultMmkv by lazy {
     MMKV.defaultMMKV()
@@ -41,4 +45,17 @@ fun stringSet(key: String, mmkv: MMKV = defaultMmkv) = MmkvStringSetDelegate(key
 fun date(key: String, format: DateFormat = yyyyMMddFormat, mmkv: MMKV = defaultMmkv) =
     MmkvDateDelegate(key, format, mmkv)
 
-inline fun <reified T> json(key: String, mmkv: MMKV = defaultMmkv) = MmkvJsonDelegate<T>(key, mmkv)
+inline fun <reified T> json(key: String, mmkv: MMKV = defaultMmkv) =
+    object : MmkvDelegate<T?>(key, mmkv) {
+        override fun getValue(thisRef: Any?, property: KProperty<*>): T? {
+            return mmkv.decodeString(key)?.let {
+                it.toObject(object : TypeToken<T>() {}.type)
+            }
+        }
+
+        override fun setValue(thisRef: Any?, property: KProperty<*>, value: T?) {
+            value?.let {
+                mmkv.encode(key, it.toJson(object : TypeToken<T>() {}.type))
+            } ?: mmkv.remove(key)
+        }
+    }

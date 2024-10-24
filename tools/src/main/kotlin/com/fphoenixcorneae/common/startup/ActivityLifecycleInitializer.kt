@@ -14,7 +14,7 @@ class ActivityLifecycleInitializer : Initializer<Unit>, CoroutineScope by IoScop
         launch {
             // 注册应用生命周期回调
             applicationContext.registerActivityLifecycleCallbacks(ActivityLifecycleCallbacksImpl())
-            "ActivityLifecycleInitializer 初始化, threadId: ${Thread.currentThread()}".logd("startup")
+            "ActivityLifecycleInitializer 初始化, thread: ${Thread.currentThread()}".logd("startup")
         }
     }
 

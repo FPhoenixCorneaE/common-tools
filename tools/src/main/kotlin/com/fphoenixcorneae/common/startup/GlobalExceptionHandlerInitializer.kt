@@ -17,11 +17,11 @@ class GlobalExceptionHandlerInitializer : Initializer<Unit>, CoroutineScope by I
                 // 重启应用
                 relaunchApp()
             }
-            "GlobalExceptionHandlerInitializer 初始化, threadId: ${Thread.currentThread()}".logd("startup")
+            "GlobalExceptionHandlerInitializer 初始化, thread: ${Thread.currentThread()}".logd("startup")
         }
     }
 
     override fun dependencies(): MutableList<Class<out Initializer<*>>> {
-        return mutableListOf()
+        return mutableListOf(ApplicationInitializer::class.java)
     }
 }
