@@ -27,6 +27,7 @@
         <activity android:name=".location.LocationActivity" />
         <activity android:name=".spannable.SpannableStringActivity" />
         <activity android:name=".mmkv.MmkvDelegateActivity" />
+        <activity android:name=".datastore.DataStoreDelegateActivity" />
         <!-- Startup -->
         <provider
             android:name="androidx.startup.InitializationProvider"

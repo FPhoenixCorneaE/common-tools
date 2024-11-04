@@ -9,7 +9,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.Navigator
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import com.fphoenixcorneae.common.R
+import androidx.navigation.ui.R
 
 fun Fragment.navigate(
     @IdRes resId: Int,

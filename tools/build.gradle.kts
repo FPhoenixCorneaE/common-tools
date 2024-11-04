@@ -10,11 +10,11 @@ plugins {
 }
 
 android {
+    namespace = "com.fphoenixcorneae.common"
     compileSdk = Deps.Android.compileSdkVersion
 
     defaultConfig {
         minSdk = Deps.Android.minSdkVersion
-        targetSdk = Deps.Android.targetSdkVersion
         consumerProguardFile("consumer-rules.pro")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -56,7 +56,7 @@ android {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
-    packagingOptions {
+    packaging {
         resources.excludes += "DebugProbesKt.bin"
     }
 
@@ -68,6 +68,7 @@ android {
     }
 
     lint {
+        targetSdk = Deps.Android.targetSdkVersion
     }
 
     configurations.all {
@@ -91,6 +92,7 @@ dependencies {
     // lifecycle
     implementation(Deps.Lifecycle.runtimeKtx)
     implementation(Deps.Lifecycle.viewModelKtx)
+    implementation(Deps.Lifecycle.liveDataKtx)
     // navigation
     implementation(Deps.Navigation.commonKtx)
     implementation(Deps.Navigation.runtimeKtx)
@@ -98,6 +100,8 @@ dependencies {
     implementation(Deps.Navigation.uiKtx)
     // startup
     implementation(Deps.Startup.runtime)
+    // DataStore
+    implementation(Deps.DataStore.preferences)
     // coil
     implementation(Deps.Coil.coil)
     implementation(Deps.Coil.gif)
@@ -135,7 +139,7 @@ afterEvaluate {
             create<MavenPublication>(Deps.BuildType.Release) {
                 from(components[Deps.BuildType.Release])
                 groupId = "com.github.FPhoenixCorneaE"
-                artifactId = project.name.toLowerCase()
+                artifactId = project.name.lowercase()
                 version = project.version.toString()
             }
         }

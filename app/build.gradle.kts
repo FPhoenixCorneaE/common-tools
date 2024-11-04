@@ -9,6 +9,7 @@ plugins {
 }
 
 android {
+    namespace = "com.fphoenixcorneae.common.demo"
     compileSdk = Deps.Android.compileSdkVersion
 
     defaultConfig {
@@ -61,7 +62,7 @@ android {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
-    packagingOptions {
+    packaging {
         resources.excludes += "DebugProbesKt.bin"
     }
 
@@ -96,6 +97,7 @@ dependencies {
     implementation(Deps.Navigation.runtimeKtx)
     implementation(Deps.Navigation.fragmentKtx)
     implementation(Deps.Navigation.uiKtx)
+    implementation(Deps.DataStore.preferences)
     implementation(Deps.Coil.coil)
     implementation(Deps.Coil.gif)
     implementation(Deps.Coil.svg)

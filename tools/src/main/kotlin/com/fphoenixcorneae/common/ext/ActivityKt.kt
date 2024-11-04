@@ -199,7 +199,7 @@ inline fun <reified T : Activity> Fragment.startKtxActivity(
     vararg values: Pair<String, Any>,
 ) =
     activity?.let {
-        startActivity(activity?.getIntent<T>(flags, extra, *values))
+        startActivity(it.getIntent<T>(flags, extra, *values))
     }
 
 inline fun <reified T : Activity> Context.startKtxActivity(
@@ -222,7 +222,7 @@ inline fun <reified T : Activity> Fragment.startKtxActivityForResult(
     extra: Bundle? = null,
 ) =
     activity?.let {
-        startActivityForResult(activity?.getIntent<T>(flags, extra), requestCode)
+        startActivityForResult(it.getIntent<T>(flags, extra), requestCode)
     }
 
 inline fun <reified T : Context> Context.getIntent(

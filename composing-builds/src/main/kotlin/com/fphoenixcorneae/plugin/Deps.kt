@@ -7,16 +7,14 @@ class Deps : Plugin<Project> {
 
     override fun apply(target: Project) {}
 
-    /** Android */
     object Android {
-        const val compileSdkVersion = 33
+        const val compileSdkVersion = 34
         const val minSdkVersion = 23
-        const val targetSdkVersion = 33
+        const val targetSdkVersion = 34
         const val versionCode = 210
         const val versionName = "2.1.0"
     }
 
-    /** BuildType */
     object BuildType {
         const val Debug = "debug"
         const val Release = "release"
@@ -26,42 +24,43 @@ class Deps : Plugin<Project> {
         const val coroutinesPermissions = "com.github.FPhoenixCorneaE:CoroutinesPermissions:1.0.0"
     }
 
-    /** AndroidX */
     object AndroidX {
-        const val appcompat = "androidx.appcompat:appcompat:1.6.1"
+        const val appcompat = "androidx.appcompat:appcompat:1.7.0"
         const val material = "com.google.android.material:material:1.6.1"
-        const val coreKtx = "androidx.core:core-ktx:1.9.0"
+        const val coreKtx = "androidx.core:core-ktx:1.13.1"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
-        const val activityKtx = "androidx.activity:activity-ktx:1.6.1"
-        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.5.5"
-        const val viewpager2 = "androidx.viewpager2:viewpager2:1.0.0"
+        const val activityKtx = "androidx.activity:activity-ktx:1.9.2"
+        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.8.3"
+        const val viewpager2 = "androidx.viewpager2:viewpager2:1.1.0"
         const val paletteKtx = "androidx.palette:palette-ktx:1.0.0"
     }
 
-    /** Lifecycle */
     object Lifecycle {
-        private const val version = "2.5.1"
+        private const val version = "2.8.7"
         const val runtimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:$version"
         const val viewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
+        const val liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:$version"
     }
 
-    /** Navigation */
     object Navigation {
-        private const val version = "2.5.3"
+        private const val version = "2.8.0"
         const val commonKtx = "androidx.navigation:navigation-common-ktx:$version"
         const val fragmentKtx = "androidx.navigation:navigation-fragment-ktx:$version"
         const val runtimeKtx = "androidx.navigation:navigation-runtime-ktx:$version"
         const val uiKtx = "androidx.navigation:navigation-ui-ktx:$version"
     }
 
-    /** Startup */
     object Startup {
         const val runtime = "androidx.startup:startup-runtime:1.1.1"
     }
 
-    /** Coroutines */
+    object DataStore {
+        private const val version = "1.1.1"
+        const val preferences = "androidx.datastore:datastore-preferences:${version}"
+    }
+
     object Coroutines {
-        private const val version = "1.7.1"
+        private const val version = "1.9.0"
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
         const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
     }
@@ -87,7 +86,6 @@ class Deps : Plugin<Project> {
             "com.github.Commit451.coil-transformations:transformations-face-detection:$version"
     }
 
-    /** Test */
     object Test {
         const val junit = "junit:junit:4.13.2"
         const val core = "androidx.test:core:1.5.0"

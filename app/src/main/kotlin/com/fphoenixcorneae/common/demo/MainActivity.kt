@@ -14,6 +14,7 @@ import com.fphoenixcorneae.common.annotation.GradientType
 import com.fphoenixcorneae.common.annotation.Shape
 import com.fphoenixcorneae.common.demo.cache.CacheActivity
 import com.fphoenixcorneae.common.demo.databinding.ActivityMainBinding
+import com.fphoenixcorneae.common.demo.datastore.DataStoreDelegateActivity
 import com.fphoenixcorneae.common.demo.location.LocationActivity
 import com.fphoenixcorneae.common.demo.mmkv.MmkvDelegateActivity
 import com.fphoenixcorneae.common.demo.shortcut.ShortcutActivity
@@ -261,6 +262,10 @@ class MainActivity : AppCompatActivity() {
 
     fun mmkv(view: View) {
         startKtxActivity<MmkvDelegateActivity>()
+    }
+
+    fun dataStore(view: View) {
+        startKtxActivity<DataStoreDelegateActivity>()
     }
 }
 
