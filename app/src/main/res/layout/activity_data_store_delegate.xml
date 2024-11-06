@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -8,9 +10,78 @@
             type="com.fphoenixcorneae.common.demo.datastore.DataStoreViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:dividerPadding="4dp"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.userId}" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="StringPreference"
+                tools:ignore="HardcodedText">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:inputType="text"
+                    android:onTextChanged="@{(s, start, before, count) -> viewModel.setUserId(s.toString())}"
+                    android:text="@{viewModel.userId}"
+                    tools:ignore="Autofill,HardcodedText,LabelFor" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.userNickname}" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="StringPreference"
+                tools:ignore="HardcodedText">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:inputType="text"
+                    android:onTextChanged="@{(s, start, before, count) -> viewModel.setUserNickname(s.toString())}"
+                    android:text="@{viewModel.userNickname}"
+                    tools:ignore="Autofill,HardcodedText,LabelFor" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:layout_gravity="end"
+                android:layout_marginTop="8dp"
+                android:checked="@{viewModel.bindQQSwitch}"
+                android:onCheckedChanged="@{(buttonView, isChecked) -> viewModel.setBindQQSwitch(isChecked)}"
+                android:text="@{viewModel.bindQQSwitch.toString()}" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:layout_gravity="end"
+                android:layout_marginTop="8dp"
+                android:checked="@{viewModel.bindEmailSwitch}"
+                android:onCheckedChanged="@{(buttonView, isChecked) -> viewModel.setBindEmailSwitch(isChecked)}"
+                android:text="@{viewModel.bindEmailSwitch.toString()}" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

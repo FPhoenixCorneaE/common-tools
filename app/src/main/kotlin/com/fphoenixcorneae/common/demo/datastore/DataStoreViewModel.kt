@@ -6,8 +6,8 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
 class DataStoreViewModelFactory(
-    val userRepository: UserRepository = UserRepository(),
-    val settingsRepository: SettingsRepository = SettingsRepository(),
+    private val userRepository: UserRepository = UserRepository(),
+    private val settingsRepository: SettingsRepository = SettingsRepository(),
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return if (modelClass.isAssignableFrom(DataStoreViewModel::class.java)) {
@@ -19,16 +19,37 @@ class DataStoreViewModelFactory(
 }
 
 class DataStoreViewModel(
-    val userRepository: UserRepository,
-    val settingsRepository: SettingsRepository,
+    private val userRepository: UserRepository,
+    private val settingsRepository: SettingsRepository,
 ) : ViewModel() {
 
-    init {
+    val userId = userRepository.userId.asLiveData()
+    val userNickname = userRepository.userNickname.asLiveData()
+
+    val bindQQSwitch = settingsRepository.bindQQSwitch.asLiveData()
+    val bindEmailSwitch = settingsRepository.bindEmailSwitch.asLiveData()
+
+    fun setUserId(userId: String?) {
         viewModelScope.launch {
-            userRepository.userId.put("11111")
-            userRepository.userNickname.put("一脸懵逼")
-            settingsRepository.bindQQSwitch.put(true)
-            settingsRepository.bindEmailSwitch.put(false)
+            userRepository.userId.put(userId)
+        }
+    }
+
+    fun setUserNickname(userNickname: String?) {
+        viewModelScope.launch {
+            userRepository.userNickname.put(userNickname)
+        }
+    }
+
+    fun setBindQQSwitch(bindQQSwitch: Boolean?) {
+        viewModelScope.launch {
+            settingsRepository.bindQQSwitch.put(bindQQSwitch)
+        }
+    }
+
+    fun setBindEmailSwitch(bindEmailSwitch: Boolean?) {
+        viewModelScope.launch {
+            settingsRepository.bindEmailSwitch.put(bindEmailSwitch)
         }
     }
 }
