@@ -1,13 +1,24 @@
 package com.fphoenixcorneae.common.dsl.layout
 
 import android.content.Context
-import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.Typeface
 import android.text.Editable
 import android.util.TypedValue
-import android.view.*
-import android.widget.*
+import android.view.GestureDetector
+import android.view.Gravity
+import android.view.MotionEvent
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.FrameLayout
+import android.widget.HorizontalScrollView
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
+import android.widget.TextView
+import android.widget.ViewFlipper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.helper.widget.Flow
 import androidx.constraintlayout.helper.widget.Layer
@@ -24,6 +35,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.fphoenixcorneae.common.ext.appResources
 
 /**
  * the extension functions and field in this file help you to build layout dynamically,
@@ -784,7 +796,7 @@ val Int.dp: Int
         return TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
             this.toFloat(),
-            Resources.getSystem().displayMetrics
+            appResources.displayMetrics
         ).toInt()
     }
 

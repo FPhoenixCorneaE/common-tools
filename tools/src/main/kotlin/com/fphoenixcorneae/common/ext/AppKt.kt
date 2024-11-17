@@ -9,10 +9,12 @@ import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.NameNotFoundException
+import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Process
 import java.io.ByteArrayInputStream
+import java.io.File
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.security.cert.CertificateFactory
@@ -21,6 +23,9 @@ import javax.security.auth.x500.X500Principal
 import kotlin.system.exitProcess
 
 private val DEBUG_DN = X500Principal("CN=Android Debug, O=Android, C=US")
+
+val appResources: Resources
+    get() = applicationContext.resources
 
 /**
  * Get package name
@@ -294,11 +299,20 @@ fun isAppRunning(pkgName: String): Boolean {
 }
 
 /**
+ * Return whether application is installed.
+ *
+ * @param pkgName The name of the package.
+ * @return `true`: yes<br></br>`false`: no
+ */
+@SuppressLint("SdCardPath")
+fun isAppInstalled(pkgName: String) = File("/data/data/$pkgName").exists()
+
+/**
  * Launch the application.
  *
  * @param pkgName The name of the package.
  */
-fun launchApp(pkgName: String = appPackageName, requestCode: Int) {
+fun launchApp(pkgName: String = appPackageName) {
     if (pkgName.isSpace()) {
         return
     }
@@ -307,6 +321,7 @@ fun launchApp(pkgName: String = appPackageName, requestCode: Int) {
         "Launcher activity isn't exist.".loge()
         return
     }
+    launchAppIntent?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
     applicationContext.startActivity(launchAppIntent)
 }
 

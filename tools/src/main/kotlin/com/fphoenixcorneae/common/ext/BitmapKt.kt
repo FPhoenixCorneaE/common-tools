@@ -1,17 +1,44 @@
 package com.fphoenixcorneae.common.ext
 
-import android.content.res.Resources
-import android.graphics.*
+import android.annotation.SuppressLint
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.BitmapShader
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
+import android.graphics.LinearGradient
+import android.graphics.Matrix
+import android.graphics.Paint
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
+import android.graphics.PorterDuffXfermode
+import android.graphics.Rect
+import android.graphics.RectF
+import android.graphics.Shader
 import android.media.ExifInterface
 import android.os.Build
-import android.renderscript.*
+import android.renderscript.Allocation
+import android.renderscript.Element
+import android.renderscript.RSIllegalArgumentException
+import android.renderscript.RenderScript
+import android.renderscript.ScriptIntrinsicBlur
 import androidx.annotation.ColorInt
 import androidx.annotation.FloatRange
 import androidx.annotation.IntRange
 import androidx.annotation.RequiresApi
 import com.fphoenixcorneae.common.annotation.ImageType
-import java.io.*
-import java.util.*
+import java.io.BufferedOutputStream
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileDescriptor
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.InputStream
+import java.io.OutputStream
+import java.util.Locale
 import kotlin.math.abs
 
 /**
@@ -107,12 +134,11 @@ fun ByteArray?.toBitmap(maxWidth: Int, maxHeight: Int, offset: Int = 0): Bitmap?
 fun Int.toBitmap(maxWidth: Int = 0, maxHeight: Int = 0): Bitmap? = runCatching {
     if (maxWidth > 0 && maxHeight > 0) {
         val options = BitmapFactory.Options()
-        val resources: Resources = applicationContext.resources
         options.inJustDecodeBounds = true
-        BitmapFactory.decodeResource(resources, this, options)
+        BitmapFactory.decodeResource(appResources, this, options)
         options.inSampleSize = calculateBitmapInSampleSize(options, maxWidth, maxHeight)
         options.inJustDecodeBounds = false
-        BitmapFactory.decodeResource(resources, this, options)
+        BitmapFactory.decodeResource(appResources, this, options)
     } else {
         getDrawable(this)?.run {
             val canvas = Canvas()
@@ -239,6 +265,7 @@ fun Bitmap.rotate(degrees: Float, px: Float, py: Float, recycle: Boolean = false
  * 支持的格式有：JPEG, DNG, CR2, NEF, NRW, ARW, RW2, ORF and RAF。
  * @return the rotated degree
  */
+@RequiresApi(Build.VERSION_CODES.Q)
 fun File.getRotateDegree(): Int = runCatching {
     when (ExifInterface(this).getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)) {
         ExifInterface.ORIENTATION_ROTATE_90 -> 90
@@ -629,6 +656,7 @@ fun Bitmap.renderScriptBlur(
  * @return the blur bitmap
  */
 fun Bitmap.stackBlur(
+    @SuppressLint("SupportAnnotationUsage")
     @FloatRange(from = 1.0, to = 25.0, fromInclusive = true) radius: Int = 20,
     recycle: Boolean = false,
 ): Bitmap = run {

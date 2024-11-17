@@ -1,57 +1,71 @@
 package com.fphoenixcorneae.common.ext
 
+import android.annotation.SuppressLint
 import android.content.res.AssetFileDescriptor
 import android.content.res.ColorStateList
-import android.content.res.Resources
 import android.content.res.XmlResourceParser
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.os.Build
-import androidx.annotation.*
+import androidx.annotation.ArrayRes
+import androidx.annotation.ColorRes
+import androidx.annotation.DimenRes
+import androidx.annotation.DrawableRes
+import androidx.annotation.FontRes
+import androidx.annotation.RawRes
+import androidx.annotation.StringRes
+import androidx.annotation.XmlRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import java.io.InputStream
 
 
-val appResources: Resources
-    get() = applicationContext.resources
-
+@SuppressLint("DiscouragedApi")
 fun getLayoutIdByName(name: String): Int {
     return appResources.getIdentifier(name, "layout", appPackageName)
 }
 
+@SuppressLint("DiscouragedApi")
 fun getStringIdByName(name: String): Int {
     return appResources.getIdentifier(name, "string", appPackageName)
 }
 
+@SuppressLint("DiscouragedApi")
 fun getDrawableIdByName(name: String): Int {
     return appResources.getIdentifier(name, "drawable", appPackageName)
 }
 
+@SuppressLint("DiscouragedApi")
 fun getMipmapIdByName(name: String): Int {
     return appResources.getIdentifier(name, "mipmap", appPackageName)
 }
 
+@SuppressLint("DiscouragedApi")
 fun getStyleId(name: String): Int {
     return appResources.getIdentifier(name, "style", appPackageName)
 }
 
+@SuppressLint("DiscouragedApi")
 fun getIdByName(name: String): Int {
     return appResources.getIdentifier(name, "id", appPackageName)
 }
 
+@SuppressLint("DiscouragedApi")
 fun getColorIdByName(name: String): Int {
     return appResources.getIdentifier(name, "color", appPackageName)
 }
 
+@SuppressLint("DiscouragedApi")
 fun getArrayIdByName(name: String): Int {
     return appResources.getIdentifier(name, "array", appPackageName)
 }
 
+@SuppressLint("DiscouragedApi")
 fun getAnimIdByName(name: String): Int {
     return appResources.getIdentifier(name, "anim", appPackageName)
 }
 
+@SuppressLint("DiscouragedApi")
 fun getMenuIdByName(name: String): Int {
     return appResources.getIdentifier(name, "menu", appPackageName)
 }

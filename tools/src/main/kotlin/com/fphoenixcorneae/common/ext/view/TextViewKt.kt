@@ -15,7 +15,7 @@ fun TextView.autoScaleTextSize(maxWidth: Int) {
     val textString = text
     var width = paint.measureText(textString, 0, textString.length)
     while (width > maxWidth && paint.textSize > 0) {
-        paint.textSize = paint.textSize - 1
+        paint.textSize -= 1
         width = paint.measureText(textString, 0, textString.length)
     }
     invalidate()

@@ -1,6 +1,5 @@
 package com.fphoenixcorneae.common.compat
 
-import android.R
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.res.Resources
@@ -13,6 +12,7 @@ import android.widget.FrameLayout
  * 解决 WebView 内输入框被软键盘遮挡
  * @since 2020/12/4 17:40
  */
+@SuppressLint("DiscouragedApi", "InternalInsetResource")
 class AndroidBug5497Workaround private constructor(activity: Activity) {
     private val mChildOfContent: View
     private var usableHeightPrevious = 0
@@ -36,7 +36,8 @@ class AndroidBug5497Workaround private constructor(activity: Activity) {
                 // keyboard probably just became visible
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                     //frameLayoutParams.height = usableHeightSansKeyboard - heightDifference;
-                    frameLayoutParams.height = usableHeightSansKeyboard - heightDifference + statusBarHeight
+                    frameLayoutParams.height =
+                        usableHeightSansKeyboard - heightDifference + statusBarHeight
                 } else {
                     frameLayoutParams.height = usableHeightSansKeyboard - heightDifference
                 }
@@ -69,7 +70,7 @@ class AndroidBug5497Workaround private constructor(activity: Activity) {
         val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
         statusBarHeight = resources.getDimensionPixelSize(resourceId)
         this.activity = activity
-        val content = activity.findViewById<View>(R.id.content) as FrameLayout
+        val content = activity.findViewById<View>(android.R.id.content) as FrameLayout
         mChildOfContent = content.getChildAt(0)
 
         //界面出现变动都会调用这个监听事件

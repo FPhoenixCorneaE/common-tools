@@ -15,6 +15,7 @@ class DisplayUnitTest {
 
     @Test
     fun dp2px_px2dp() {
+//        appResources.displayMetrics.density = 4f
         print("//==============================dp2px_px2dp=======================================//")
         println()
         print("Int.dp2px: ${10.dp}")

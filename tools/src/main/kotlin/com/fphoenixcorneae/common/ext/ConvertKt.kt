@@ -7,8 +7,10 @@ import android.graphics.Canvas
 import android.graphics.PixelFormat
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.annotation.RequiresApi
 import com.fphoenixcorneae.common.annotation.MemoryUnit
 import kotlinx.parcelize.Parceler
 import org.json.JSONArray
@@ -186,6 +188,7 @@ fun InputStream?.toBytes(): ByteArray? =
  * Input stream to string.
  * @param charset  The charset.
  */
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 fun InputStream?.toString(
     charset: Charset,
 ): String =
@@ -412,7 +415,7 @@ fun Bitmap?.toBytes(
  */
 fun Bitmap?.toDrawable(): Drawable? =
     this?.run {
-        BitmapDrawable(applicationContext.resources, this)
+        BitmapDrawable(appResources, this)
     }
 
 /**

@@ -1,8 +1,8 @@
 package com.fphoenixcorneae.common.util.toast.style
 
-import android.content.res.Resources
 import android.util.TypedValue
 import android.view.Gravity
+import com.fphoenixcorneae.common.ext.applicationContext
 import com.fphoenixcorneae.common.util.toast.IToastStyle
 
 /**
@@ -37,7 +37,7 @@ abstract class BaseToastStyle : IToastStyle {
         return TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
             dpValue,
-            Resources.getSystem().displayMetrics
+            applicationContext.resources.displayMetrics
         ).toInt()
     }
 
@@ -48,7 +48,7 @@ abstract class BaseToastStyle : IToastStyle {
         return TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_SP,
             spValue,
-            Resources.getSystem().displayMetrics
+            applicationContext.resources.displayMetrics
         ).toInt()
     }
 }

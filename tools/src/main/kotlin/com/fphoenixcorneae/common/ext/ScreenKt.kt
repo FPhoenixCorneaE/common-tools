@@ -1,7 +1,6 @@
 package com.fphoenixcorneae.common.ext
 
 import android.Manifest
-import android.R
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
@@ -58,14 +57,14 @@ val realScreenHeight: Int
  */
 val screenDensity: Float
     get() =
-        Resources.getSystem().displayMetrics.density
+        applicationContext.resources.displayMetrics.density
 
 /**
  * 获取屏幕密度dpi，屏幕密度表示为每英寸多少个像素点
  */
 val screenDensityDpi: Int
     get() =
-        Resources.getSystem().displayMetrics.densityDpi
+        applicationContext.resources.displayMetrics.densityDpi
 
 /**
  * 判断是否横屏
@@ -268,7 +267,7 @@ fun Activity.getDecorViewInvisibleHeight(): Int {
  * 获取ContentView不可见高度
  */
 fun Activity.getContentViewInvisibleHeight(): Int {
-    val contentView = window.findViewById<View>(R.id.content) ?: return 0
+    val contentView = window.findViewById<View>(android.R.id.content) ?: return 0
     val outRect = Rect()
     contentView.getWindowVisibleDisplayFrame(outRect)
     val delta = abs(contentView.bottom - outRect.bottom)

@@ -31,10 +31,10 @@ fun String?.urlEncode(charset: Charset = UTF_8): String {
  * @param charset     The charset.
  */
 fun String?.urlDecode(charset: Charset = UTF_8): String {
-    return if (this == null || this.isEmpty()) {
+    return if (isNullOrEmpty()) {
         ""
     } else try {
-        val safeInput = this.replace("%(?![0-9a-fA-F]{2})".toRegex(), "%25").replace("\\+".toRegex(), "%2B")
+        val safeInput = replace("%(?![0-9a-fA-F]{2})".toRegex(), "%25").replace("\\+".toRegex(), "%2B")
         URLDecoder.decode(safeInput, charset.name())
     } catch (e: UnsupportedEncodingException) {
         e.printStackTrace()
@@ -103,7 +103,7 @@ fun File?.base64Encode2String(): String {
  * Return the bytes of decode Base64-encode string.
  */
 fun String?.base64Decode(): ByteArray {
-    return if (this == null || this.isEmpty()) {
+    return if (isNullOrEmpty()) {
         ByteArray(0)
     } else {
         Base64.decode(this, Base64.NO_WRAP)
@@ -125,7 +125,7 @@ fun ByteArray?.base64Decode(): ByteArray {
  * Return html-encode string.
  */
 fun CharSequence?.htmlEncode(): String {
-    if (this == null || this.isEmpty()) {
+    if (isNullOrEmpty()) {
         return ""
     }
     val sb = StringBuilder()
@@ -157,7 +157,7 @@ fun CharSequence?.htmlEncode(): String {
  */
 @SuppressLint("ObsoleteSdkInt")
 fun String?.htmlDecode(): CharSequence {
-    if (this == null || this.isEmpty()) {
+    if (isNullOrEmpty()) {
         return ""
     }
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -171,7 +171,7 @@ fun String?.htmlDecode(): CharSequence {
  * Return the binary encoded string padded with one space
  */
 fun String?.binaryEncode(): String {
-    if (this == null || this.isEmpty()) {
+    if (isNullOrEmpty()) {
         return ""
     }
     val sb = StringBuilder()
@@ -185,7 +185,7 @@ fun String?.binaryEncode(): String {
  * Return UTF-8 String from binary
  */
 fun String?.binaryDecode(): String {
-    if (this == null || this.isEmpty()) {
+    if (isNullOrEmpty()) {
         return ""
     }
     val splits = this.split(" ").toTypedArray()

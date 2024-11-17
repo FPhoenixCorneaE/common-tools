@@ -1,6 +1,5 @@
 package com.fphoenixcorneae.common.ext
 
-import android.content.res.Resources
 import android.util.TypedValue
 
 
@@ -13,7 +12,7 @@ val Int.Dp: Float
         TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
             this.toFloat(),
-            Resources.getSystem().displayMetrics
+            appResources.displayMetrics
         )
 
 /**
@@ -25,7 +24,7 @@ val Float.Dp: Float
         TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
             this,
-            Resources.getSystem().displayMetrics
+            appResources.displayMetrics
         )
 
 /**
@@ -37,7 +36,7 @@ val Double.Dp: Float
         TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
             this.toFloat(),
-            Resources.getSystem().displayMetrics
+            appResources.displayMetrics
         )
 
 /**
@@ -49,7 +48,7 @@ val Int.Sp: Float
         TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_SP,
             this.toFloat(),
-            Resources.getSystem().displayMetrics
+            appResources.displayMetrics
         )
 
 /**
@@ -61,7 +60,7 @@ val Float.Sp: Float
         TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_SP,
             this,
-            Resources.getSystem().displayMetrics
+            appResources.displayMetrics
         )
 
 /**
@@ -73,14 +72,14 @@ val Double.Sp: Float
         TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_SP,
             this.toFloat(),
-            Resources.getSystem().displayMetrics
+            appResources.displayMetrics
         )
 
 /**
  * Int 类型： px 转换为 dp
  */
 fun Int.toDp(): Float = run {
-    val scale = Resources.getSystem().displayMetrics.density
+    val scale = appResources.displayMetrics.density
     this / scale + 0.5f
 }
 
@@ -88,7 +87,7 @@ fun Int.toDp(): Float = run {
  * Float 类型： px 转换为 dp
  */
 fun Float.toDp(): Float = run {
-    val scale = Resources.getSystem().displayMetrics.density
+    val scale = appResources.displayMetrics.density
     this / scale + 0.5f
 }
 
@@ -96,7 +95,7 @@ fun Float.toDp(): Float = run {
  * Double 类型： px 转换为 dp
  */
 fun Double.toDp(): Float = run {
-    val scale = Resources.getSystem().displayMetrics.density
+    val scale = appResources.displayMetrics.density
     this / scale + 0.5f
 }.toFloat()
 
@@ -104,7 +103,7 @@ fun Double.toDp(): Float = run {
  * Int 类型： px 转换为 sp
  */
 fun Int.toSp(): Float = run {
-    val fontScale = Resources.getSystem().displayMetrics.scaledDensity
+    val fontScale = appResources.displayMetrics.scaledDensity
     this / fontScale + 0.5f
 }
 
@@ -112,7 +111,7 @@ fun Int.toSp(): Float = run {
  * Float 类型： px 转换为 sp
  */
 fun Float.toSp(): Float = run {
-    val fontScale = Resources.getSystem().displayMetrics.scaledDensity
+    val fontScale = appResources.displayMetrics.scaledDensity
     this / fontScale + 0.5f
 }
 
@@ -120,7 +119,7 @@ fun Float.toSp(): Float = run {
  * Double 类型： px 转换为 sp
  */
 fun Double.toSp(): Float = run {
-    val fontScale = Resources.getSystem().displayMetrics.scaledDensity
+    val fontScale = appResources.displayMetrics.scaledDensity
     this / fontScale + 0.5f
 }.toFloat()
 
